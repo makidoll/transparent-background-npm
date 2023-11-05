@@ -4,3 +4,4 @@ models/*.pth
 *.jpg
 *.png
 !tiny.png
+!example.png

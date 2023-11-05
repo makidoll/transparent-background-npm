@@ -19,6 +19,8 @@ npm install transparent-background
 
 ## Example
 
+![Before and after](https://github.com/makidoll/transparent-background-npm/blob/main/example.png)
+
 ```ts
 import * as fs from "fs/promises";
 import { transparentBackground } from "transparent-background";
