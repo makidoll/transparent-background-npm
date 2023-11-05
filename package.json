@@ -1,5 +1,6 @@
 {
 	"name": "transparent-background",
+	"main": "lib/main.js",
 	"scripts": {
 		"build": "tsc",
 		"install": "node lib/install.js"
