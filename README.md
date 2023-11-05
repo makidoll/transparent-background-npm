@@ -2,7 +2,7 @@
 
 [![](https://img.shields.io/npm/v/transparent-background)](https://www.npmjs.com/package/transparent-background)
 
-`transparent-background` lets you **easily remove backgrounds** from images powered by [InSPyReNet (ACCV 2022)](https://github.com/xuebinqin/U-2-Net)
+`transparent-background` lets you **easily remove backgrounds** from images powered by [InSPyReNet (ACCV 2022)](https://github.com/plemeri/InSPyReNet)
 
 This package **requires Python installed system-wide** and will install and run the tool locally.
 
