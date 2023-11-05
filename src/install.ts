@@ -70,6 +70,8 @@ async function exists(filePath: string) {
 
 	for (const libVersion of ["lib", "lib64"]) {
 		const venvLibDir = path.resolve(venvDir, libVersion);
+		if (!(await exists(venvLibDir))) continue;
+
 		const venvLibFiles = await fs.readdir(venvLibDir);
 
 		for (const pythonVersion of venvLibFiles) {

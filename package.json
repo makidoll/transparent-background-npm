@@ -1,7 +1,7 @@
 {
 	"name": "transparent-background",
 	"main": "lib/main.js",
-	"version": "1.0.0-1",
+	"version": "1.0.1",
 	"license": "MIT",
 	"repository": "https://github.com/makidoll/transparent-background-npm",
 	"description": "transparent-background lets you easily remove backgrounds from images powered by InSPyReNet (ACCV 2022)",
