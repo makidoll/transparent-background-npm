@@ -6,7 +6,7 @@
 
 This package **requires Python installed system-wide** and will install and run the tool locally.
 
-Thanks to @plemeri for creating [transparent-background](https://github.com/plemeri/transparent-background)
+Thanks to [@plemeri](https://github.com/plemeri/) for creating [transparent-background](https://github.com/plemeri/transparent-background)
 
 ```bash
 pnpm install transparent-background
