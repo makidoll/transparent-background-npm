@@ -2,12 +2,13 @@
 
 [![](https://img.shields.io/npm/v/transparent-background)](https://www.npmjs.com/package/transparent-background)
 
-`transparent-background` lets you **easily remove backgrounds** from images powered by [InSPyReNet (ACCV 2022)](https://github.com/plemeri/InSPyReNet)
+`transparent-background` lets you **easily remove backgrounds** from images
 
-Thanks to [@plemeri](https://github.com/plemeri/) for creating [transparent-background](https://github.com/plemeri/transparent-background)
+Powered by [InSPyReNet (ACCV 2022)](https://github.com/plemeri/InSPyReNet), thanks to [@plemeri](https://github.com/plemeri/) for creating [transparent-background](https://github.com/plemeri/transparent-background)
 
 -   **Python** must be installed system-wide
 -   Works on **Linux, macOS and Windows**
+    -   Python is already pre-installed on **macOS**
     -   If failing on **Windows**, you might have to install **Python 3.8**
 
 ```bash

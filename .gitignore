@@ -1,3 +1,6 @@
 venv
 node_modules
 models/*.pth
+*.jpg
+*.png
+!tiny.png
