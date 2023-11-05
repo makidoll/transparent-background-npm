@@ -27,7 +27,7 @@ async function exists(filePath: string) {
 	try {
 		await fs.stat(filePath);
 		return true;
-	} catch {
+	} catch (error) {
 		return false;
 	}
 }
