@@ -1,12 +1,11 @@
 import execa from "execa";
 import * as fs from "fs/promises";
-import * as os from "os";
 import * as path from "path";
 import { transparentBackground } from "./main";
-import { venvDir } from "./utils";
+import { isWindows, venvDir } from "./utils";
 
 async function findSystemPython() {
-	const findPath = os.platform() == "win32" ? "where" : "which";
+	const findPath = isWindows ? "where" : "which";
 	const pythonNames = ["python3", "python"];
 
 	// windows has python3 in path but does microsoft store funny
@@ -14,7 +13,10 @@ async function findSystemPython() {
 
 	for (const pythonName of pythonNames) {
 		try {
-			const pythonPath = (await execa(findPath, [pythonName])).stdout;
+			const pythonPath = (
+				await execa(findPath, [pythonName])
+			).stdout.split("\n")[0]; // windows shows multiple lines
+
 			if (pythonPath.includes("not found")) continue; // linux or mac
 			if (pythonPath.includes("not find")) continue; // windows
 
@@ -65,7 +67,10 @@ async function exists(filePath: string) {
 
 	// install package
 
-	const pipPath = path.resolve(venvDir, "bin/pip");
+	const pipPath = path.resolve(
+		venvDir,
+		isWindows ? "Scripts/pip.exe" : "bin/pip",
+	);
 
 	await execa(pipPath, ["install", "-U", "transparent-background==1.2.9"], {
 		stdout: "inherit",
@@ -77,7 +82,7 @@ async function exists(filePath: string) {
 
 	// modify python file
 
-	for (const libVersion of ["lib", "lib64"]) {
+	for (const libVersion of ["lib", "lib64", "Lib"]) {
 		const venvLibDir = path.resolve(venvDir, libVersion);
 		if (!(await exists(venvLibDir))) continue;
 
@@ -108,6 +113,8 @@ async function exists(filePath: string) {
 	// download models and test
 	// if fails then installation will fail too
 	// would be nice if we could move ~/.transparent-background inside here
+
+	console.log("Downloading InSPyReNet models and testing them...");
 
 	const tinyPng = await fs.readFile(path.resolve(__dirname, "../tiny.png"));
 
