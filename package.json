@@ -1,0 +1,15 @@
+{
+	"name": "transparent-background",
+	"scripts": {
+		"build": "tsc",
+		"install": "node lib/install.js"
+	},
+	"dependencies": {
+		"execa": "^5.1.1",
+		"tmp-promise": "^3.0.3"
+	},
+	"devDependencies": {
+		"@types/node": "^20.8.10",
+		"typescript": "^5.2.2"
+	}
+}
