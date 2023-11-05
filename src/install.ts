@@ -9,15 +9,24 @@ async function findSystemPython() {
 	const findPath = os.platform() == "win32" ? "where" : "which";
 	const pythonNames = ["python3", "python"];
 
+	// windows has python3 in path but does microsoft store funny
+	// which does stderr so lets try catch
+
 	for (const pythonName of pythonNames) {
-		const pythonPath = (await execa(findPath, [pythonName])).stdout;
-		if (pythonPath.includes("not found")) continue; // linux or mac
-		if (pythonPath.includes("not find")) continue; // windows
+		try {
+			const pythonPath = (await execa(findPath, [pythonName])).stdout;
+			if (pythonPath.includes("not found")) continue; // linux or mac
+			if (pythonPath.includes("not find")) continue; // windows
 
-		const pythonVersion = (await execa(pythonPath, ["--version"])).stdout;
-		if (!pythonVersion.includes("Python ")) continue;
+			const pythonVersion = (await execa(pythonPath, ["--version"]))
+				.stdout;
 
-		return pythonPath;
+			if (!pythonVersion.includes("Python 3.")) continue;
+
+			return pythonPath;
+		} catch (error) {
+			continue;
+		}
 	}
 
 	return null;
