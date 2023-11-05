@@ -2,16 +2,12 @@ import execa = require("execa");
 import * as fs from "fs/promises";
 import * as path from "path";
 import * as tmp from "tmp-promise";
-
-const transparentBackgroundPath = path.resolve(
-	__dirname,
-	"../venv/bin/transparent-background",
-);
+import { modelsDir, transparentBackgroundPath, venvDir } from "./utils";
 
 export async function transparentBackground(
 	file: Buffer,
 	fileExt: string,
-	fast = false,
+	options: { fast?: boolean } = {},
 ) {
 	if (!fileExt.startsWith(".")) fileExt = "." + fileExt;
 	const inputFile = await tmp.file({ postfix: fileExt });
@@ -25,14 +21,18 @@ export async function transparentBackground(
 	const { stdout, stderr } = await execa(
 		transparentBackgroundPath,
 		[
+			...(options.fast ? ["-m", "fast"] : []),
 			"--source",
 			inputFile.path,
 			"--dest",
 			outputDir.path,
-			...(fast ? ["--fast"] : []),
 		],
 		{
 			reject: false,
+			env: {
+				VIRTUAL_ENV: venvDir,
+				MODELS_DIR: modelsDir,
+			},
 		},
 	);
 

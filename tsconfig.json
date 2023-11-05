@@ -4,7 +4,8 @@
 		"module": "commonjs",
 		"target": "es2022",
 		"outDir": "lib",
-		"declaration": true
+		"declaration": true,
+		"esModuleInterop": true
 	},
 	"include": ["src/**/*"]
 }
