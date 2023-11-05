@@ -67,18 +67,22 @@ async function exists(filePath: string) {
 
 	// install package
 
-	const pipPath = path.resolve(
+	const venvPythonPath = path.resolve(
 		venvDir,
-		isWindows ? "Scripts/pip.exe" : "bin/pip",
+		isWindows ? "Scripts/python.exe" : "bin/python",
 	);
 
-	await execa(pipPath, ["install", "-U", "transparent-background==1.2.9"], {
-		stdout: "inherit",
-		stderr: "inherit",
-		env: {
-			VIRTUAL_ENV: venvDir,
+	await execa(
+		venvPythonPath,
+		["-m", "pip", "install", "-U", "transparent-background==1.2.9"],
+		{
+			stdout: "inherit",
+			stderr: "inherit",
+			env: {
+				VIRTUAL_ENV: venvDir,
+			},
 		},
-	});
+	);
 
 	// modify python file
 
