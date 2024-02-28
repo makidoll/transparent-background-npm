@@ -51,7 +51,14 @@ export async function transparentBackground(
 	const outputPath = path.resolve(outputDir.path, outputFilenames[0]);
 	const outputBuffer = await fs.readFile(outputPath);
 
-	await outputDir.cleanup();
+	outputDir.cleanup().catch(() => {
+		fs.rm(outputDir.path, { recursive: true, force: true }).catch(() => {
+			// dont wanna throw since the operation was successful
+			console.log(
+				"Transparent background, failed to cleanup: " + outputDir.path,
+			);
+		});
+	});
 
 	return outputBuffer;
 }
